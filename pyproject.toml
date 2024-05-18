@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "vini-data-api-docs"
+version = "0.1.0"
+description = ""
+authors = ["Brisa <brisamnascimento@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+mkdocs = "^1.6.0"
+mkdocs-material = "^9.5.23"
+mkdocstrings = {extras = ["python"], version = "^0.25.1"}
+pymdown-extensions = "^10.8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,12 @@
+# mkdocs documentation
+/site
+
+# pyenv
+.python-version
+
+# Environments
+.venv
+
+# Images
+*.png
+*.jpeg
