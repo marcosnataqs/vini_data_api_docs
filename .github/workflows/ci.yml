@@ -20,10 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material
+          pip install poetry
+          poetry install
 
       - name: Build and Deploy
         run: |
-          mkdocs gh-deploy --force
+          poetry run mkdocs gh-deploy --force
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
