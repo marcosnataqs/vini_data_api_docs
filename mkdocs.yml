@@ -1,4 +1,5 @@
 site_name: Vini Data API Documentation
+site_url: https://marcosnataqs.github.io/vini_data_api
 repo_url: https://github.com/marcosnataqs/vini_data_api
 
 theme: material
