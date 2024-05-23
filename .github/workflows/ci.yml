@@ -23,10 +23,13 @@ jobs:
           pip install poetry
           poetry install
 
-      - name: Build and Deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.VINI_DATA_API_DOCS_ACTIONS_TOKEN }}
+      - name: Configure Git
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+
+      - name: Build and Deploy
+        env:
+          VINI_DATA_API_DOCS_ACTIONS_TOKEN: ${{ secrets.VINI_DATA_API_DOCS_ACTIONS_TOKEN }}
+        run: |
           poetry run mkdocs gh-deploy --force --remote-name origin --remote-branch gh-pages
