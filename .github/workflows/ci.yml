@@ -27,4 +27,4 @@ jobs:
         run: |
           poetry run mkdocs gh-deploy --force
         env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.VINI_DATA_API_DOCS_ACTIONS_TOKEN }}
