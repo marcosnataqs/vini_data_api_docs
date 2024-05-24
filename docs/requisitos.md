@@ -1,7 +1,7 @@
-# Requisitos :computer:
-Nesta seção, abordaremos os requisitos preliminares para o desenvolvimento do modelo, englobando requisitos de sistema, ferramentas e as principais bibliotecas utilizadas.
+# **Requisitos** :computer:
+Nesta seção, abordaremos os requisitos preliminares para o desenvolvimento do modelo englobando as principais bibliotecas utilizadas.
 
-## **Requisitos de Sistema**
+<!-- ## **Requisitos de Sistema**
 Antes de instalar ou usar a nossa aplicação, garanta que possui os requisitos de sistema descritos abaixo:
 
 #### Sistemas operacionais
@@ -19,7 +19,7 @@ Microsoft Edge: [Version].
 Para uma melhor experiência, recomendamos utilizar as últimas versões de algum dos browsers descritos acima.
 
 #### Hardware apropriado
-…
+… -->
 
 ## **Bibliotecas e dependências**
 Linguagem de programação: Python ^3.9 para a aplicação
@@ -71,5 +71,6 @@ Para a documentação foram utilizadas as bibliotecas:
 * mkdocs-material = "^9.5.23"
 * mkdocstrings = {extras = ["python"], version = "^0.25.1"}
 * pymdown-extensions = "^10.8.1"
+* markdown = "^3.6"
 
 para a publicação da documentação, usamos o Github Pages

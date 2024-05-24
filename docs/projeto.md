@@ -1,10 +1,10 @@
-# Projeto :bar_chart:
+# **Projeto** :bar_chart:
 ## **Origem dos dados**
 O site de vitivinicultura da Embrapa dispõe de dados quantitativos de uvas processadas, produção e comercialização de vinhos, suco e derivados provenientes do Estado do Rio Grande do Sul, grande contribuinte para a produção nacional desses insumos. Além disso, dispõe de dados de importações e exportações dos produtos da vitivinicultura, incluindo Países de Origem/Destino, quantidade e valor associado. Os dados disponibilizados possuem um recorte histórico que tem início em 1970 até 2023.
 
-![imagem do site](images/site_embrapa.png)
+<center>![imagem do site](images/site_embrapa.png)</center>
 
-[Site de Vitivinicultura - Embrapa 2024](http://vitibrasil.cnpuv.embrapa.br/)
+<center>[Site de Vitivinicultura - Embrapa 2024](http://vitibrasil.cnpuv.embrapa.br/)</center>
 
 ## **Desenvolvimento da aplicação**
 Esse projeto foi desenvolvido usando o fastapi_template, configurando as etapas a seguir:
@@ -22,9 +22,9 @@ A configuração de backend disponível no template permite duas configurações
 
 Após a configuração do template, a raiz do repositório ficou com a seguinte estrutura:
 
-![Raiz do template após configuração inicial](images/raiz_template.png)
+<center>![Raiz do template após configuração inicial](images/raiz_template.png)</center>
 
-[Link para o repositório do Template](https://github.com/s3rius/FastAPI-template)
+<center>[Link para o repositório do Template](https://github.com/s3rius/FastAPI-template)</center>
 
 ## **Deploy da aplicação**
 
@@ -36,9 +36,9 @@ O deploy da aplicação e do banco de dados foi realizado utilizando a Cloud Ren
 
 [Repositório da Documentação](https://github.com/marcosnataqs/vini_data_api_docs)
 
-[Documentação](https://)
+[Documentação](https://marcosnataqs.github.io/vini_data_api_docs/arquitetura/)
 
-![Aplicação em Produção no Render](images/app_producao.png)
+<center>![Aplicação em Produção no Render](images/app_producao.png)</center>
 
 ## **Modelo de Machine Learning**
 Abaixo seguem algumas aplicações possíveis dos dados desta API em projetos de machine learning:
@@ -55,3 +55,5 @@ Abaixo seguem algumas aplicações possíveis dos dados desta API em projetos de
 > Grupo de potenciais clientes interessados por um determinado produto
 >
 > Nessa fase do projeto não focaremos no Modelo de Machine Learning e sim no desenvolvimento do projeto da API desde a ingestão dos dados até a alimentação do modelo.
+
+:pencil: **Nota:** *As aplicações de modelos de Machine Learning levantadas nessa seção serão validadas no decorrer do projeto principalmente após a etapa de pré processamento e análise dos dados.*

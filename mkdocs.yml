@@ -1,10 +1,23 @@
 site_name: Vini Data API Documentation
 site_url: https://marcosnataqs.github.io/vini_data_api
+repo_name: marcosnataqs/vini_data_api
 repo_url: https://github.com/marcosnataqs/vini_data_api
 
-theme: material
+theme: 
+  name: material
+  features: 
+   - navigation.tabs
+   - navigation.sections
+   - toc.integrate
+   - navigation.top
+   - search.suggest
+   - search.highlight
+   - content.tabs.link
+   - content.code.annotation
+   - content.code.copy
 
 plugins:
+ - search 
  - mkdocstrings
 
 markdown_extensions:
@@ -12,7 +25,17 @@ markdown_extensions:
  - pymdownx.tasklist
  - pymdownx.mark
  - pymdownx.tilde
- - pymdownx.highlight
+ - pymdownx.highlight:
+     anchor_linenums: true
+ - pymdownx.inlinehilite
+ - pymdownx.snippets
+ - pymdownx.arithmatex:
+     generic: true
+ - admonition
+ - footnotes
+ - pymdownx.details
+ - pymdownx.superfences
+ - attr_list
  
 nav:
  - Overview: index.md

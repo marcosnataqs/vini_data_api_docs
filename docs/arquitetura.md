@@ -1,18 +1,18 @@
-# Arquitetura :triangular_ruler:
+# **Arquitetura** :triangular_ruler:
 ## **Diagrama de Arquitetura**
 Para uma compreensão mais detalhada da arquitetura do projeto, preparamos um diagrama de Arquitetura. Este diagrama ilustra de forma resumida como o dado é obtido a partir das interações do cliente até a entrada dos dados do modelo.
 
-![diagrama arquitetura](images/diagrama_arquitetura.png)
+<center>![diagrama arquitetura](images/diagrama_arquitetura.png)</center>
 
-[Diagrama Arquitetura](https://drive.google.com/file/d/1wkqBWUY2eOjV9fB7ssEsUKk0E3UZnBwO/view?usp=sharing)
+<center>[Diagrama Arquitetura](https://drive.google.com/file/d/1wkqBWUY2eOjV9fB7ssEsUKk0E3UZnBwO/view?usp=sharing)</center>
 
 ## **Extração dos dados**
 A extração dos dados ocorre por meio de web scraping, sendo que a lógica responsável pela extração dos dados pode ser encontrada em `vini_data_api>web>api>vitivinicultura>extractions`.
 De maneira geral o código responsável pela extração dos dados está organizado de modo a se beneficiar da herança e seu diagrama de classes pode ser visualizado abaixo:
 
-![diagrama extração](images/diagrama_extracao.png)
+<center>![diagrama extração](images/diagrama_extracao.png)</center>
 
-[Estrutura código de extração de Dados](https://drive.google.com/file/d/1j4tpnNdg1ZTxORg_rSINcA46nO7Vpcgj/view?usp=sharing)
+<center>[Estrutura código de extração de Dados](https://drive.google.com/file/d/1j4tpnNdg1ZTxORg_rSINcA46nO7Vpcgj/view?usp=sharing)</center>
 
 ## **Estrutura código de extração de dados**
 
@@ -26,11 +26,17 @@ O método **Extract** trata-se do principal método de cada uma das classes filh
 Abaixo podem ser visualizados os gists de todas as classes envolvidas nesse diagrama, bem como da função web_data_extractor.
 
 ==* Função web_data_extractor==
+
 ==* Classe Base==
+
 ==* Classe Comercialization==
+
 ==* Classe Exports==
+
 ==* Classe Imports==
+
 ==* Classe Processing==
+
 ==* Classe Production==
 
 ## **Construção da API**
@@ -58,14 +64,14 @@ A persistência de dados desse projeto é realizada por meio de modelos no códi
 
 Foi necessário realizar a criação do database **vini_data_api** e o deploy do banco de dados no Render.
 
-![database](images/database.png)
+<center>![database](images/database.png)</center>
 
-*Database vini_data_api*
+<center>*Database vini_data_api*</center>
 
 Ao executar o projeto, o ORM escolhido se encarrega de criar as tabelas no banco de dados configurado nos schemas dos modelos.
 
-![query](images/query.png)
+<center>![query](images/query.png)</center>
 
-*Query para consulta na tabela Users*
+<center>*Query para consulta na tabela Users*</center>
 
 Nessa etapa do projeto foram persistidos apenas os registros de usuários da API na tabela “user”. Isso ocorre porque os dados consumidos pelo modelo de Machine Learning serão extraídos pela API em formato ``.json``, conforme previsto na arquitetura e nos requisitos do Projeto.
