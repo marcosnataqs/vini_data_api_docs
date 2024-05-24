@@ -25,19 +25,118 @@ O método **Extract** trata-se do principal método de cada uma das classes filh
 
 Abaixo podem ser visualizados os gists de todas as classes envolvidas nesse diagrama, bem como da função web_data_extractor.
 
-==* Função web_data_extractor==
+1. No código abaixo, podemos observar o codigo da função **web_data_extractor** responsável por acessar a pagina WEB e coletar o HTML que será utilizado no scrapping:
+```python
+    from typing import Dict, List
+    import requests
+    from bs4 import BeautifulSoup
 
-==* Classe Base==
+    def web_data_extractor(url: str) -> List[Dict[str, str]]:
+        extracted_data: List[Dict[str, str]] = []
 
-==* Classe Comercialization==
+        # Faz a requisição para a página
+        response = requests.get(url)
+        if response.status_code == 200:
+            # Parseia o conteúdo HTML da resposta
+            soup = BeautifulSoup(response.content, "html.parser")
 
-==* Classe Exports==
+            # Encontra a tabela na página
+            table = soup.find("table", class_="tb_base tb_dados")
+            if not table:
+                print(f"Nenhuma tabela encontrada em {url}")
+                return
 
-==* Classe Imports==
+            # Extrai os cabeçalhos da tabela
+            headers = [header.text.strip() for header in table.find("thead").find_all("th")]
 
-==* Classe Processing==
+            # Inicializa uma lista para armazenar os dados
+            table_data = []
 
-==* Classe Production==
+            # Extrai as linhas da tabela
+            for row in table.find("tbody").find_all("tr"):
+                cols = row.find_all("td")
+                if cols:
+                    cols = [ele.text.strip() for ele in cols]
+                    table_data.append(dict(zip(headers, cols)))
+
+            extracted_data = table_data
+        else:
+            print(f"Erro ao acessar {url}")
+
+        return extracted_data
+```
+
+2. O codigo abaixo demonstra a implementação da classe **base**:
+```python
+    from abc import ABC, abstractmethod
+    from typing import Any, List
+
+    from pydantic import BaseModel
+
+
+    class BaseExtraction(ABC):
+        def __init__(self) -> None:
+            pass
+
+        @abstractmethod
+        def extract(self, year: int) -> BaseModel:
+            pass
+
+        @abstractmethod
+        def normalize(self, data: List[dict[str, str]], *args: Any) -> List[dict[str, str]]:
+            pass
+```
+3. A seguir podemos observar o exeplo da classe **production**:
+```python
+    from typing import Any, List
+    from vini_data_api.web.api.vitivinicultura.extractions.base import BaseExtraction
+    from vini_data_api.web.api.vitivinicultura.schema import Production, ProductionResponse
+    from vini_data_api.web.utils.web_data_extractor import web_data_extractor
+
+    class ProductionExtraction(BaseExtraction):
+        def __init__(self) -> None:
+            pass
+
+        def extract(self, year: int) -> ProductionResponse:
+            # URLs das páginas para fazer a extração
+            urls = [
+                f"http://vitibrasil.cnpuv.embrapa.br/index.php?ano={year}&opcao=opt_02",
+            ]
+            productions = []
+
+            for url in urls:
+                data = web_data_extractor(url)
+                data = self.normalize(data)
+                for row in data:
+                    product = row["product"]
+                    quantity = (
+                        int(row["quantity"].replace(".", ""))
+                        if row["quantity"] not in ["-", "*"]
+                        else 0
+                    )
+                    type = row["type"]
+                    production = Production(product=product, quantity=quantity, type=type)
+                    productions.append(production)
+
+            return ProductionResponse(productions=productions)
+
+        def normalize(self, data: List[dict[str, str]], *args: Any) -> List[dict[str, str]]:
+            flat_struct: List[dict[str, str]] = []
+            current_principal_product = None
+
+            for item in data:
+                if item["Produto"].isupper():  # É um produto principal
+                    current_principal_product = item["Produto"]
+                else:  # É um subproduto
+                    novo_item = {
+                        "product": item["Produto"],
+                        "quantity": item["Quantidade (L.)"],
+                        "type": current_principal_product,
+                    }
+                    flat_struct.append(novo_item)
+
+            return flat_struct
+```
 
 ## **Construção da API**
 
@@ -54,10 +153,6 @@ A validação da chamada API dentro de um período específico, pode ser estudad
 Os endpoints disponíveis, poderão ser encontrados em `vini_data_api>web>api>vitivinicultura>views.py`, para a construção dos mesmos, foi utilizada a lib **FastAPI** e nesta sessão não entraremos no detalhe de cada endpoint, pois o mesmo será documentado na sessão seguinte do presente documento.
 
 Para fins de consulta ao código, favor referir aos gists relacionados abaixo:
-
-==- Gist UTILS YearRangeValidation==
-
-==- Gist views.py==
 
 ## **Persistência no Banco de Dados**
 A persistência de dados desse projeto é realizada por meio de modelos no código usando SQLAlchemy que mapeia as informações da normalização para as tabelas finais no banco de dados PostgreSQL. A biblioteca FastAPI utiliza esses modelos para validar e serializar dados, enquanto o SQLAlchemy gerencia as sessões e transações de banco de dados gravando as informações pertinentes.
